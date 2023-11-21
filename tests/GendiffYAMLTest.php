@@ -8,6 +8,8 @@ class GendiffYAMLTest extends TestCase
 {
     /**
      * @covers \Hexlet\Code\gendiff\gendiff
+     * @covers \Hexlet\Code\Parsers\parser\parseFile
+     * @covers \Hexlet\Code\Parsers\Types\yaml\parseYaml
      */
     public function testGendiff(): void
     {

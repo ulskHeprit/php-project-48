@@ -8,6 +8,8 @@ class GendiffJSONTest extends TestCase
 {
     /**
      * @covers \Hexlet\Code\gendiff\gendiff
+     * @covers \Hexlet\Code\Parsers\parser\parseFile
+     * @covers \Hexlet\Code\Parsers\Types\json\parseJson
      */
     public function testGendiff(): void
     {
