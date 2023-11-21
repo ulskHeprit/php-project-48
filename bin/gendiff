@@ -1,10 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-use function Hexlet\Code\gendiff;
+use function Hexlet\Code\gendiff\gendiff;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../src/gendiff.php';
+require_once __DIR__ . '/../autoload.php';
 
 $doc = <<<'DOCOPT'
 Generate diff

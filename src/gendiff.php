@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexlet\Code;
+namespace Hexlet\Code\gendiff;
 
 function gendiff($arr1, $arr2)
 {
