@@ -1,7 +1,10 @@
 #!/usr/bin/env php
 <?php
 
+use function Hexlet\Code\gendiff;
+
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/gendiff.php';
 
 $doc = <<<'DOCOPT'
 Generate diff
@@ -17,6 +20,21 @@ Options:
   --format <fmt>                Report format [default: stylish]
 DOCOPT;
 
-$result = Docopt::handle($doc, array('version'=>'1.0.0rc2'));
-foreach ($result as $k=>$v)
-    echo $k.': '.json_encode($v).PHP_EOL;
+$result = Docopt::handle($doc, ['version' => '1.0.0rc2']);
+
+if (isset($result['<firstFile>']) && isset($result['<secondFile>'])) {
+    $path1 = $result['<firstFile>'];
+    if (!file_exists($path1)) {
+        $path1 = __DIR__ . '/../' . $path1;
+    }
+
+    $path2 = $result['<secondFile>'];
+    if (!file_exists($path2)) {
+        $path2 = __DIR__ . '/../' . $path2;
+    }
+
+    $json1 = json_decode(file_get_contents($path1), true);
+    $json2 = json_decode(file_get_contents($path2), true);
+
+    echo gendiff($json1, $json2);
+}
