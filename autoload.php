@@ -1,4 +1,5 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/src/gendiff.php';
+
+define('WORKING_DIR', __DIR__);

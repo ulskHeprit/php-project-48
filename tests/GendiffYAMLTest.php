@@ -2,16 +2,17 @@
 
 use PHPUnit\Framework\TestCase;
 use function Hexlet\Code\gendiff\gendiff;
+use function Hexlet\Code\Parsers\parser\parseFile;
 
-class GendiffTest extends TestCase
+class GendiffYAMLTest extends TestCase
 {
     /**
      * @covers \Hexlet\Code\gendiff\gendiff
      */
     public function testGendiff(): void
     {
-        $arr1 = json_decode(file_get_contents(__DIR__ . '/fixtures/file1.json'), true);
-        $arr2 = json_decode(file_get_contents(__DIR__ . '/fixtures/file2.json'), true);
+        $arr1 = parseFile('tests/fixtures/file1.yaml');
+        $arr2 = parseFile('tests/fixtures/file2.yaml');
 
         $expected = <<<EXP
 {

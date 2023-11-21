@@ -2,6 +2,7 @@
 <?php
 
 use function Hexlet\Code\gendiff\gendiff;
+use function Hexlet\Code\Parsers\parser\parseFile;
 
 require_once __DIR__ . '/../autoload.php';
 
@@ -22,18 +23,8 @@ DOCOPT;
 $result = Docopt::handle($doc, ['version' => '1.0.0rc2']);
 
 if (isset($result['<firstFile>']) && isset($result['<secondFile>'])) {
-    $path1 = $result['<firstFile>'];
-    if (!file_exists($path1)) {
-        $path1 = __DIR__ . '/../' . $path1;
-    }
+    $arr1 = parseFile($result['<firstFile>']);
+    $arr2 = parseFile($result['<secondFile>']);
 
-    $path2 = $result['<secondFile>'];
-    if (!file_exists($path2)) {
-        $path2 = __DIR__ . '/../' . $path2;
-    }
-
-    $json1 = json_decode(file_get_contents($path1), true);
-    $json2 = json_decode(file_get_contents($path2), true);
-
-    echo gendiff($json1, $json2);
+    echo gendiff($arr1, $arr2);
 }

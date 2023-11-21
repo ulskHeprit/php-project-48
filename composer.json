@@ -3,7 +3,13 @@
     "autoload": {
         "psr-4": {
             "Hexlet\\Code\\": "src/"
-        }
+        },
+        "files": [
+            "src/gendiff.php",
+            "src/Parsers/parser.php",
+            "src/Parsers/Types/json.php",
+            "src/Parsers/Types/yaml.php"
+        ]
     },
     "authors": [
         {
@@ -12,7 +18,8 @@
         }
     ],
     "require": {
-        "docopt/docopt": "^1.0"
+        "docopt/docopt": "^1.0",
+        "symfony/yaml": "^6.3"
     },
     "bin": [
         "bin/gendiff"
