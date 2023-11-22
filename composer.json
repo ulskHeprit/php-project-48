@@ -9,7 +9,8 @@
             "src/Parsers/parser.php",
             "src/Parsers/Types/json.php",
             "src/Parsers/Types/yaml.php",
-            "src/Formatters/stylish.php"
+            "src/Formatters/stylish.php",
+            "src/Formatters/plain.php"
         ]
     },
     "authors": [

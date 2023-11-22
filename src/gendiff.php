@@ -2,6 +2,7 @@
 
 namespace Hexlet\Code\gendiff;
 
+use function Hexlet\Code\Formatters\plain\formatPlain;
 use function Hexlet\Code\Formatters\stylish\formatStylish;
 
 function gendiff($arr1, $arr2, $format)
@@ -10,6 +11,7 @@ function gendiff($arr1, $arr2, $format)
 
     $string = match ($format) {
         'stylish' => formatStylish($diff),
+        'plain'   => formatPlain($diff),
     };
 
     return $string;
@@ -24,19 +26,6 @@ function getDiff($arr1, $arr2)
     foreach ($keys as $key => $_v) {
         $keyExists1 = array_key_exists($key, $arr1);
         $keyExists2 = array_key_exists($key, $arr2);
-
-        if ($keyExists1 && is_bool($arr1[$key])) {
-            $arr1[$key] = $arr1[$key] ? 'true' : 'false';
-        }
-        if ($keyExists2 && is_bool($arr2[$key])) {
-            $arr2[$key] = $arr2[$key] ? 'true' : 'false';
-        }
-        if ($keyExists1 && is_null($arr1[$key])) {
-            $arr1[$key] = 'null';
-        }
-        if ($keyExists2 && is_null($arr2[$key])) {
-            $arr2[$key] = 'null';
-        }
 
         if (
             $keyExists1
