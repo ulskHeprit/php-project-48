@@ -9,7 +9,7 @@ function parseFile(string $filePath)
 {
     if (!file_exists($filePath)) {
         /** @phpstan-ignore-next-line */
-        $filePath = WORKING_DIR . '/../' . $filePath;
+        $filePath = __DIR__ . '/../../' . $filePath;
     }
 
     $type = pathinfo($filePath, PATHINFO_EXTENSION);

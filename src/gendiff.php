@@ -5,10 +5,6 @@ namespace Differ\Differ;
 use function Hexlet\Code\Formatters\plain\formatPlain;
 use function Hexlet\Code\Formatters\stylish\formatStylish;
 use function Hexlet\Code\Parsers\parser\parseFile;
-/** @phpstan-ignore-next-line */
-define('WORKING_DIR', __DIR__);
-
-require_once __DIR__ . '/../vendor/autoload.php';
 
 function gendiff(string $path1, string $path2, string $format = 'stylish')
 {
