@@ -2,7 +2,6 @@
 <?php
 
 use function Differ\Differ\gendiff;
-use function Hexlet\Code\Parsers\parser\parseFile;
 
 require_once __DIR__ . '/../autoload.php';
 
@@ -23,9 +22,9 @@ DOCOPT;
 $result = Docopt::handle($doc, ['version' => '1.0.0rc2']);
 
 if (isset($result['<firstFile>']) && isset($result['<secondFile>'])) {
-    $arr1 = parseFile($result['<firstFile>']);
-    $arr2 = parseFile($result['<secondFile>']);
+    $path1 = $result['<firstFile>'];
+    $path2 = $result['<secondFile>'];
     $format = $result['--format'];
 
-    echo gendiff($arr1, $arr2, $format);
+    echo gendiff($path1, $path2, $format);
 }

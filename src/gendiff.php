@@ -4,9 +4,12 @@ namespace Differ\Differ;
 
 use function Hexlet\Code\Formatters\plain\formatPlain;
 use function Hexlet\Code\Formatters\stylish\formatStylish;
+use function Hexlet\Code\Parsers\parser\parseFile;
 
-function gendiff($arr1, $arr2, $format = 'stylish')
+function gendiff($path1, $path2, $format = 'stylish')
 {
+    $arr1 = parseFile($path1);
+    $arr2 = parseFile($path2);
     $diff = getDiff($arr1, $arr2);
 
     $string = match ($format) {

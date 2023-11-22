@@ -2,7 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 use function Differ\Differ\gendiff;
-use function Hexlet\Code\Parsers\parser\parseFile;
 
 class GendiffJSONTest extends TestCase
 {
@@ -16,8 +15,8 @@ class GendiffJSONTest extends TestCase
      */
     public function testGendiffStylish(): void
     {
-        $arr1 = parseFile('tests/fixtures/file1.json');
-        $arr2 = parseFile('tests/fixtures/file2.json');
+        $arr1 = 'tests/fixtures/file1.json';
+        $arr2 = 'tests/fixtures/file2.json';
 
         $expected = <<<EXP
 {
@@ -43,8 +42,8 @@ EXP;
      */
     public function testGendiffPlain(): void
     {
-        $arr1 = parseFile('tests/fixtures/file1.json');
-        $arr2 = parseFile('tests/fixtures/file2.json');
+        $arr1 = 'tests/fixtures/file1.json';
+        $arr2 = 'tests/fixtures/file2.json';
 
         $expected = <<<EXP
 Property 'follow' was removed
@@ -64,8 +63,8 @@ EXP;
      */
     public function testGendiffJson(): void
     {
-        $arr1 = parseFile('tests/fixtures/file1.json');
-        $arr2 = parseFile('tests/fixtures/file2.json');
+        $arr1 = 'tests/fixtures/file1.json';
+        $arr2 = 'tests/fixtures/file2.json';
 
         $expected = <<<EXP
 {
@@ -106,8 +105,8 @@ EXP;
      */
     public function testGendiffNestedStylish(): void
     {
-        $arr1 = parseFile('tests/fixtures/file3.json');
-        $arr2 = parseFile('tests/fixtures/file4.json');
+        $arr1 = 'tests/fixtures/file3.json';
+        $arr2 = 'tests/fixtures/file4.json';
 
         $expected = <<<EXP
 {
@@ -169,8 +168,8 @@ EXP;
      */
     public function testGendiffNestedPlain(): void
     {
-        $arr1 = parseFile('tests/fixtures/file3.json');
-        $arr2 = parseFile('tests/fixtures/file4.json');
+        $arr1 = 'tests/fixtures/file3.json';
+        $arr2 = 'tests/fixtures/file4.json';
 
         $expected = <<<EXP
 Property 'common.follow' was added with value: false
@@ -197,8 +196,8 @@ EXP;
      */
     public function testGendiffNestedJson(): void
     {
-        $arr1 = parseFile('tests/fixtures/file3.json');
-        $arr2 = parseFile('tests/fixtures/file4.json');
+        $path1 = 'tests/fixtures/file3.json';
+        $path2 = 'tests/fixtures/file4.json';
 
         $expected = <<<EXP
 {
@@ -301,6 +300,6 @@ EXP;
 }
 EXP;
 
-        $this->assertSame($expected, gendiff($arr1, $arr2, 'json'));
+        $this->assertSame($expected, gendiff($path1, $path2, 'json'));
     }
 }

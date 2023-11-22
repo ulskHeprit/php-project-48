@@ -2,7 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 use function Differ\Differ\gendiff;
-use function Hexlet\Code\Parsers\parser\parseFile;
 
 class GendiffYAMLTest extends TestCase
 {
@@ -16,8 +15,8 @@ class GendiffYAMLTest extends TestCase
      */
     public function testGendiffStylish(): void
     {
-        $arr1 = parseFile('tests/fixtures/file1.yaml');
-        $arr2 = parseFile('tests/fixtures/file2.yaml');
+        $path1 = 'tests/fixtures/file1.yaml';
+        $path2 = 'tests/fixtures/file2.yaml';
 
         $expected = <<<EXP
 {
@@ -30,7 +29,7 @@ class GendiffYAMLTest extends TestCase
 }
 EXP;
 
-        $this->assertSame($expected, gendiff($arr1, $arr2, 'stylish'));
+        $this->assertSame($expected, gendiff($path1, $path2, 'stylish'));
     }
 
     /**
@@ -43,8 +42,8 @@ EXP;
      */
     public function testGendiffPlain(): void
     {
-        $arr1 = parseFile('tests/fixtures/file1.yaml');
-        $arr2 = parseFile('tests/fixtures/file2.yaml');
+        $arr1 = 'tests/fixtures/file1.yaml';
+        $arr2 = 'tests/fixtures/file2.yaml';
 
         $expected = <<<EXP
 Property 'follow' was removed
@@ -64,8 +63,8 @@ EXP;
      */
     public function testGendiffJson(): void
     {
-        $arr1 = parseFile('tests/fixtures/file1.yaml');
-        $arr2 = parseFile('tests/fixtures/file2.yaml');
+        $arr1 = 'tests/fixtures/file1.yaml';
+        $arr2 = 'tests/fixtures/file2.yaml';
 
         $expected = <<<EXP
 {
@@ -106,8 +105,8 @@ EXP;
      */
     public function testGendiffNestedStylish(): void
     {
-        $arr1 = parseFile('tests/fixtures/file3.yaml');
-        $arr2 = parseFile('tests/fixtures/file4.yaml');
+        $arr1 = 'tests/fixtures/file3.yaml';
+        $arr2 = 'tests/fixtures/file4.yaml';
 
         $expected = <<<EXP
 {
@@ -169,8 +168,8 @@ EXP;
      */
     public function testGendiffNestedPlain(): void
     {
-        $arr1 = parseFile('tests/fixtures/file3.yaml');
-        $arr2 = parseFile('tests/fixtures/file4.yaml');
+        $arr1 = 'tests/fixtures/file3.yaml';
+        $arr2 = 'tests/fixtures/file4.yaml';
 
         $expected = <<<EXP
 Property 'common.follow' was added with value: false
@@ -197,8 +196,8 @@ EXP;
      */
     public function testGendiffNestedJson(): void
     {
-        $arr1 = parseFile('tests/fixtures/file3.yaml');
-        $arr2 = parseFile('tests/fixtures/file4.yaml');
+        $arr1 = 'tests/fixtures/file3.yaml';
+        $arr2 = 'tests/fixtures/file4.yaml';
 
         $expected = <<<EXP
 {
