@@ -1,8 +1,10 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+
 use function Differ\Differ\gendiff;
 
+// @codingStandardsIgnoreLine
 class GendiffYAMLTest extends TestCase
 {
     /**
