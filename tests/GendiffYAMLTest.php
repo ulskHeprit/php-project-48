@@ -10,10 +10,11 @@ class GendiffYAMLTest extends TestCase
      * @covers \Hexlet\Code\gendiff\gendiff
      * @covers \Hexlet\Code\gendiff\getdiff
      * @covers \Hexlet\Code\Formatters\stylish\formatStylish
+     * @covers \Hexlet\Code\Formatters\stylish\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
      * @covers \Hexlet\Code\Parsers\Types\yaml\parseYaml
      */
-    public function testGendiff(): void
+    public function testGendiffStylish(): void
     {
         $arr1 = parseFile('tests/fixtures/file1.yaml');
         $arr2 = parseFile('tests/fixtures/file2.yaml');
@@ -29,18 +30,41 @@ class GendiffYAMLTest extends TestCase
 }
 EXP;
 
-
         $this->assertSame($expected, gendiff($arr1, $arr2, 'stylish'));
     }
 
     /**
      * @covers \Hexlet\Code\gendiff\gendiff
      * @covers \Hexlet\Code\gendiff\getdiff
-     * @covers \Hexlet\Code\Formatters\stylish\formatStylish
+     * @covers \Hexlet\Code\Formatters\plain\formatPlain
+     * @covers \Hexlet\Code\Formatters\plain\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
      * @covers \Hexlet\Code\Parsers\Types\yaml\parseYaml
      */
-    public function testGendiffNested(): void
+    public function testGendiffPlain(): void
+    {
+        $arr1 = parseFile('tests/fixtures/file1.yaml');
+        $arr2 = parseFile('tests/fixtures/file2.yaml');
+
+        $expected = <<<EXP
+Property 'follow' was removed
+Property 'proxy' was removed
+Property 'timeout' was updated. From 50 to 20
+Property 'verbose' was added with value: true
+EXP;
+
+        $this->assertSame($expected, gendiff($arr1, $arr2, 'plain'));
+    }
+
+    /**
+     * @covers \Hexlet\Code\gendiff\gendiff
+     * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Hexlet\Code\Formatters\stylish\formatStylish
+     * @covers \Hexlet\Code\Formatters\stylish\toString
+     * @covers \Hexlet\Code\Parsers\parser\parseFile
+     * @covers \Hexlet\Code\Parsers\Types\yaml\parseYaml
+     */
+    public function testGendiffNestedStylish(): void
     {
         $arr1 = parseFile('tests/fixtures/file3.yaml');
         $arr2 = parseFile('tests/fixtures/file4.yaml');
@@ -92,7 +116,36 @@ EXP;
 }
 EXP;
 
-
         $this->assertSame($expected, gendiff($arr1, $arr2, 'stylish'));
+    }
+
+    /**
+     * @covers \Hexlet\Code\gendiff\gendiff
+     * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Hexlet\Code\Formatters\plain\formatPlain
+     * @covers \Hexlet\Code\Formatters\plain\toString
+     * @covers \Hexlet\Code\Parsers\parser\parseFile
+     * @covers \Hexlet\Code\Parsers\Types\yaml\parseYaml
+     */
+    public function testGendiffNestedPlain(): void
+    {
+        $arr1 = parseFile('tests/fixtures/file3.yaml');
+        $arr2 = parseFile('tests/fixtures/file4.yaml');
+
+        $expected = <<<EXP
+Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
+Property 'common.setting3' was updated. From true to null
+Property 'common.setting4' was added with value: 'blah blah'
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From '' to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group1.nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]
+EXP;
+
+        $this->assertSame($expected, gendiff($arr1, $arr2, 'plain'));
     }
 }

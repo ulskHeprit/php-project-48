@@ -10,6 +10,7 @@ class GendiffJSONTest extends TestCase
      * @covers \Hexlet\Code\gendiff\gendiff
      * @covers \Hexlet\Code\gendiff\getdiff
      * @covers \Hexlet\Code\Formatters\stylish\formatStylish
+     * @covers \Hexlet\Code\Formatters\stylish\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
      * @covers \Hexlet\Code\Parsers\Types\json\parseJson
      */
@@ -29,14 +30,14 @@ class GendiffJSONTest extends TestCase
 }
 EXP;
 
-
         $this->assertSame($expected, gendiff($arr1, $arr2, 'stylish'));
     }
 
     /**
      * @covers \Hexlet\Code\gendiff\gendiff
      * @covers \Hexlet\Code\gendiff\getdiff
-     * @covers \Hexlet\Code\Formatters\stylish\formatPlain
+     * @covers \Hexlet\Code\Formatters\plain\formatPlain
+     * @covers \Hexlet\Code\Formatters\plain\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
      * @covers \Hexlet\Code\Parsers\Types\json\parseJson
      */
@@ -52,7 +53,6 @@ Property 'timeout' was updated. From 50 to 20
 Property 'verbose' was added with value: true
 EXP;
 
-
         $this->assertSame($expected, gendiff($arr1, $arr2, 'plain'));
     }
 
@@ -60,6 +60,7 @@ EXP;
      * @covers \Hexlet\Code\gendiff\gendiff
      * @covers \Hexlet\Code\gendiff\getdiff
      * @covers \Hexlet\Code\Formatters\stylish\formatStylish
+     * @covers \Hexlet\Code\Formatters\stylish\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
      * @covers \Hexlet\Code\Parsers\Types\json\parseJson
      */
@@ -115,14 +116,14 @@ EXP;
 }
 EXP;
 
-
         $this->assertSame($expected, gendiff($arr1, $arr2, 'stylish'));
     }
 
     /**
      * @covers \Hexlet\Code\gendiff\gendiff
      * @covers \Hexlet\Code\gendiff\getdiff
-     * @covers \Hexlet\Code\Formatters\stylish\formatPlain
+     * @covers \Hexlet\Code\Formatters\plain\formatPlain
+     * @covers \Hexlet\Code\Formatters\plain\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
      * @covers \Hexlet\Code\Parsers\Types\json\parseJson
      */
@@ -144,7 +145,6 @@ Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]
 EXP;
-
 
         $this->assertSame($expected, gendiff($arr1, $arr2, 'plain'));
     }
