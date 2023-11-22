@@ -5,7 +5,7 @@ namespace Differ\Differ;
 use function Hexlet\Code\Formatters\plain\formatPlain;
 use function Hexlet\Code\Formatters\stylish\formatStylish;
 
-function gendiff($arr1, $arr2, $format)
+function gendiff($arr1, $arr2, $format = 'stylish')
 {
     $diff = getDiff($arr1, $arr2);
 
