@@ -5,10 +5,10 @@ namespace Hexlet\Code\Parsers\parser;
 use function Hexlet\Code\Parsers\Types\json\parseJson;
 use function Hexlet\Code\Parsers\Types\yaml\parseYaml;
 
-function parseFile($filePath)
+function parseFile(string $filePath)
 {
     if (!file_exists($filePath)) {
-        $filePath = WORKING_DIR . '/' . $filePath;
+        $filePath = WORKING_DIR . '/../' . $filePath;
     }
 
     $type = pathinfo($filePath, PATHINFO_EXTENSION);

@@ -6,7 +6,9 @@ use function Hexlet\Code\Formatters\plain\formatPlain;
 use function Hexlet\Code\Formatters\stylish\formatStylish;
 use function Hexlet\Code\Parsers\parser\parseFile;
 
-function gendiff($path1, $path2, $format = 'stylish')
+define('WORKING_DIR', __DIR__);
+
+function gendiff(string $path1, string $path2, string $format = 'stylish')
 {
     $arr1 = parseFile($path1);
     $arr2 = parseFile($path2);
@@ -21,7 +23,7 @@ function gendiff($path1, $path2, $format = 'stylish')
     return $string;
 }
 
-function getDiff($arr1, $arr2)
+function getDiff(array $arr1, array $arr2)
 {
     $uniq = array_unique(array_merge(array_keys($arr1), array_keys($arr2)));
     sort($uniq);

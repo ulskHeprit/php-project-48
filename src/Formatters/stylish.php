@@ -2,7 +2,7 @@
 
 namespace Hexlet\Code\Formatters\stylish;
 
-function formatStylish($diff, $depth = 0)
+function formatStylish(array $diff, int $depth = 0)
 {
     $lines = ['{'];
     $depth++;
@@ -74,7 +74,7 @@ function formatStylish($diff, $depth = 0)
     return implode(PHP_EOL, $lines);
 }
 
-function toString($value)
+function toString(mixed $value)
 {
     if (is_bool($value)) {
         return $value ? 'true' : 'false';

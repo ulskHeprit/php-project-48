@@ -2,7 +2,7 @@
 
 namespace Hexlet\Code\Formatters\plain;
 
-function formatPlain($diff, $keys = [])
+function formatPlain(array $diff, array $keys = [])
 {
     foreach ($diff as $key => $data) {
         $name = implode('.', [...$keys, $key]);
@@ -43,7 +43,7 @@ function formatPlain($diff, $keys = [])
     return implode(PHP_EOL, $lines);
 }
 
-function toString($value)
+function toString(mixed $value)
 {
     if (is_bool($value)) {
         return $value ? 'true' : 'false';
