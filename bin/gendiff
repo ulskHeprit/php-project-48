@@ -25,6 +25,7 @@ $result = Docopt::handle($doc, ['version' => '1.0.0rc2']);
 if (isset($result['<firstFile>']) && isset($result['<secondFile>'])) {
     $arr1 = parseFile($result['<firstFile>']);
     $arr2 = parseFile($result['<secondFile>']);
+    $format = $result['--format'];
 
-    echo gendiff($arr1, $arr2);
+    echo gendiff($arr1, $arr2, $format);
 }

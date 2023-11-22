@@ -2,9 +2,21 @@
 
 namespace Hexlet\Code\gendiff;
 
-function gendiff($arr1, $arr2)
+use function Hexlet\Code\Formatters\stylish\formatStylish;
+
+function gendiff($arr1, $arr2, $format)
 {
-    $lines = ['{'];
+    $diff = getDiff($arr1, $arr2);
+
+    $string = match ($format) {
+        'stylish' => formatStylish($diff),
+    };
+
+    return $string;
+}
+
+function getDiff($arr1, $arr2)
+{
     $uniq = array_unique(array_merge(array_keys($arr1), array_keys($arr2)));
     sort($uniq);
     $keys = array_fill_keys($uniq, '');
@@ -12,56 +24,57 @@ function gendiff($arr1, $arr2)
     foreach ($keys as $key => $_v) {
         $keyExists1 = array_key_exists($key, $arr1);
         $keyExists2 = array_key_exists($key, $arr2);
-        $value1 = null;
-        $value2 = null;
+
+        if ($keyExists1 && is_bool($arr1[$key])) {
+            $arr1[$key] = $arr1[$key] ? 'true' : 'false';
+        }
+        if ($keyExists2 && is_bool($arr2[$key])) {
+            $arr2[$key] = $arr2[$key] ? 'true' : 'false';
+        }
+        if ($keyExists1 && is_null($arr1[$key])) {
+            $arr1[$key] = 'null';
+        }
+        if ($keyExists2 && is_null($arr2[$key])) {
+            $arr2[$key] = 'null';
+        }
 
         if (
             $keyExists1
             && $keyExists2
             && $arr1[$key] === $arr2[$key]
         ) {
-            $keys[$key] = 'not changed';
-            $value1 = $arr1[$key];
+            $keys[$key] = [
+                'type'     => 'not changed',
+                'oldValue' => $arr1[$key],
+            ];
         } elseif (
             $keyExists1
             && $keyExists2
         ) {
-            $keys[$key] = 'changed';
-            $value1 = $arr1[$key];
-            $value2 = $arr2[$key];
+            if (is_array($arr1[$key]) && is_array($arr2[$key])) {
+                $keys[$key] = [
+                    'type'  => 'changed',
+                    'value' => getDiff($arr1[$key], $arr2[$key]),
+                ];
+            } else {
+                $keys[$key] = [
+                    'type'     => 'changed',
+                    'oldValue' => $arr1[$key],
+                    'newValue' => $arr2[$key],
+                ];
+            }
         } elseif ($keyExists1) {
-            $keys[$key] = 'deleted';
-            $value1 = $arr1[$key];
+            $keys[$key] = [
+                'type'     => 'deleted',
+                'oldValue' => $arr1[$key],
+            ];
         } else {
-            $keys[$key] = 'added';
-            $value2 = $arr2[$key];
-        }
-
-        if (is_bool($value1)) {
-            $value1 = $value1 ? 'true' : 'false';
-        }
-        if (is_bool($value2)) {
-            $value2 = $value2 ? 'true' : 'false';
-        }
-
-        switch ($keys[$key]) {
-            case 'not changed':
-                $lines[] = sprintf("    %s: %s", $key, $value1);
-                break;
-            case 'changed':
-                $lines[] = sprintf("  - %s: %s", $key, $value1);
-                $lines[] = sprintf("  + %s: %s", $key, $value2);
-                break;
-            case 'deleted':
-                $lines[] = sprintf("  - %s: %s", $key, $value1);
-                break;
-            case 'added':
-                $lines[] = sprintf("  + %s: %s", $key, $value2);
-                break;
+            $keys[$key] = [
+                'type'     => 'added',
+                'newValue' => $arr2[$key],
+            ];
         }
     }
 
-    $lines[] = '}';
-
-    return implode(PHP_EOL, $lines);
+    return $keys;
 }
