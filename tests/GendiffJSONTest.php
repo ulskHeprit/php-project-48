@@ -1,14 +1,14 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use function Hexlet\Code\gendiff\gendiff;
+use function Differ\Differ\gendiff;
 use function Hexlet\Code\Parsers\parser\parseFile;
 
 class GendiffJSONTest extends TestCase
 {
     /**
-     * @covers \Hexlet\Code\gendiff\gendiff
-     * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Differ\Differ\gendiff
+     * @covers \Differ\Differ\getdiff
      * @covers \Hexlet\Code\Formatters\stylish\formatStylish
      * @covers \Hexlet\Code\Formatters\stylish\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
@@ -34,8 +34,8 @@ EXP;
     }
 
     /**
-     * @covers \Hexlet\Code\gendiff\gendiff
-     * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Differ\Differ\gendiff
+     * @covers \Differ\Differ\getdiff
      * @covers \Hexlet\Code\Formatters\plain\formatPlain
      * @covers \Hexlet\Code\Formatters\plain\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
@@ -57,8 +57,8 @@ EXP;
     }
 
     /**
-     * @covers \Hexlet\Code\gendiff\gendiff
-     * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Differ\Differ\gendiff
+     * @covers \Differ\Differ\getdiff
      * @covers \Hexlet\Code\Parsers\parser\parseFile
      * @covers \Hexlet\Code\Parsers\Types\json\parseJson
      */
@@ -97,8 +97,8 @@ EXP;
     }
 
     /**
-     * @covers \Hexlet\Code\gendiff\gendiff
-     * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Differ\Differ\gendiff
+     * @covers \Differ\Differ\getdiff
      * @covers \Hexlet\Code\Formatters\stylish\formatStylish
      * @covers \Hexlet\Code\Formatters\stylish\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
@@ -160,8 +160,8 @@ EXP;
     }
 
     /**
-     * @covers \Hexlet\Code\gendiff\gendiff
-     * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Differ\Differ\gendiff
+     * @covers \Differ\Differ\getdiff
      * @covers \Hexlet\Code\Formatters\plain\formatPlain
      * @covers \Hexlet\Code\Formatters\plain\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
@@ -190,8 +190,8 @@ EXP;
     }
 
     /**
-     * @covers \Hexlet\Code\gendiff\gendiff
-     * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Differ\Differ\gendiff
+     * @covers \Differ\Differ\getdiff
      * @covers \Hexlet\Code\Parsers\parser\parseFile
      * @covers \Hexlet\Code\Parsers\Types\json\parseJson
      */

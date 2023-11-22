@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexlet\Code\gendiff;
+namespace Differ\Differ;
 
 use function Hexlet\Code\Formatters\plain\formatPlain;
 use function Hexlet\Code\Formatters\stylish\formatStylish;

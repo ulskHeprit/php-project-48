@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use function Hexlet\Code\gendiff\gendiff;
+use function Differ\Differ\gendiff;
 use function Hexlet\Code\Parsers\parser\parseFile;
 
 require_once __DIR__ . '/../autoload.php';
