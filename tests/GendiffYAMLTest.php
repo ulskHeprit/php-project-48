@@ -59,6 +59,46 @@ EXP;
     /**
      * @covers \Hexlet\Code\gendiff\gendiff
      * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Hexlet\Code\Parsers\parser\parseFile
+     * @covers \Hexlet\Code\Parsers\Types\yaml\parseYaml
+     */
+    public function testGendiffJson(): void
+    {
+        $arr1 = parseFile('tests/fixtures/file1.yaml');
+        $arr2 = parseFile('tests/fixtures/file2.yaml');
+
+        $expected = <<<EXP
+{
+    "follow": {
+        "type": "deleted",
+        "oldValue": false
+    },
+    "host": {
+        "type": "not changed",
+        "oldValue": "hexlet.io"
+    },
+    "proxy": {
+        "type": "deleted",
+        "oldValue": "123.234.53.22"
+    },
+    "timeout": {
+        "type": "changed",
+        "oldValue": 50,
+        "newValue": 20
+    },
+    "verbose": {
+        "type": "added",
+        "newValue": true
+    }
+}
+EXP;
+
+        $this->assertSame($expected, gendiff($arr1, $arr2, 'json'));
+    }
+
+    /**
+     * @covers \Hexlet\Code\gendiff\gendiff
+     * @covers \Hexlet\Code\gendiff\getdiff
      * @covers \Hexlet\Code\Formatters\stylish\formatStylish
      * @covers \Hexlet\Code\Formatters\stylish\toString
      * @covers \Hexlet\Code\Parsers\parser\parseFile
@@ -147,5 +187,120 @@ Property 'group3' was added with value: [complex value]
 EXP;
 
         $this->assertSame($expected, gendiff($arr1, $arr2, 'plain'));
+    }
+
+    /**
+     * @covers \Hexlet\Code\gendiff\gendiff
+     * @covers \Hexlet\Code\gendiff\getdiff
+     * @covers \Hexlet\Code\Parsers\parser\parseFile
+     * @covers \Hexlet\Code\Parsers\Types\yaml\parseYaml
+     */
+    public function testGendiffNestedJson(): void
+    {
+        $arr1 = parseFile('tests/fixtures/file3.yaml');
+        $arr2 = parseFile('tests/fixtures/file4.yaml');
+
+        $expected = <<<EXP
+{
+    "common": {
+        "type": "changed",
+        "value": {
+            "follow": {
+                "type": "added",
+                "newValue": false
+            },
+            "setting1": {
+                "type": "not changed",
+                "oldValue": "Value 1"
+            },
+            "setting2": {
+                "type": "deleted",
+                "oldValue": 200
+            },
+            "setting3": {
+                "type": "changed",
+                "oldValue": true,
+                "newValue": null
+            },
+            "setting4": {
+                "type": "added",
+                "newValue": "blah blah"
+            },
+            "setting5": {
+                "type": "added",
+                "newValue": {
+                    "key5": "value5"
+                }
+            },
+            "setting6": {
+                "type": "changed",
+                "value": {
+                    "doge": {
+                        "type": "changed",
+                        "value": {
+                            "wow": {
+                                "type": "changed",
+                                "oldValue": "",
+                                "newValue": "so much"
+                            }
+                        }
+                    },
+                    "key": {
+                        "type": "not changed",
+                        "oldValue": "value"
+                    },
+                    "ops": {
+                        "type": "added",
+                        "newValue": "vops"
+                    }
+                }
+            }
+        }
+    },
+    "group1": {
+        "type": "changed",
+        "value": {
+            "baz": {
+                "type": "changed",
+                "oldValue": "bas",
+                "newValue": "bars"
+            },
+            "foo": {
+                "type": "not changed",
+                "oldValue": "bar"
+            },
+            "nest": {
+                "type": "changed",
+                "oldValue": {
+                    "key": "value"
+                },
+                "newValue": "str"
+            }
+        }
+    },
+    "group2": {
+        "type": "deleted",
+        "oldValue": {
+            "abc": 12345,
+            "deep": {
+                "id": 45
+            }
+        }
+    },
+    "group3": {
+        "type": "added",
+        "newValue": {
+            "deep": {
+                "id": {
+                    "number": 45
+                }
+            },
+            "fee": 100500
+        }
+    }
+}
+EXP;
+
+        $this->assertSame($expected, gendiff($arr1, $arr2, 'json'));
     }
 }

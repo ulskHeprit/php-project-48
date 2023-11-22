@@ -12,6 +12,7 @@ function gendiff($arr1, $arr2, $format)
     $string = match ($format) {
         'stylish' => formatStylish($diff),
         'plain'   => formatPlain($diff),
+        'json'    => json_encode($diff, JSON_PRETTY_PRINT),
     };
 
     return $string;
