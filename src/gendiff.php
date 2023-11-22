@@ -8,6 +8,8 @@ use function Hexlet\Code\Parsers\parser\parseFile;
 
 define('WORKING_DIR', __DIR__);
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 function gendiff(string $path1, string $path2, string $format = 'stylish')
 {
     $arr1 = parseFile($path1);
